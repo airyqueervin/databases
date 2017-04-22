@@ -3,7 +3,8 @@
 class App {
 
   constructor() {
-    this.server = 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages';
+    // this.server = 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages';
+    this.server = 'http://127.0.0.1:3000/classes/messages';
     this.friendList = {};
     this.roomname = 'lobby';
     this.username = '';
@@ -26,7 +27,7 @@ class App {
       data: JSON.stringify(message),
       contentType: 'application/json',
       success: function (data) {
-        console.log('chatterbox: Message sent');
+        console.log('chatterbox: Message sent', data);
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -108,11 +109,11 @@ class App {
   }
 
   handleSubmit() {
-    console.log('handleSubmit called');
     var msg = { username: '', text: '', roomname: ''};
     msg.username = this.username;
     msg.text = $('#send').find('input').val();
     msg.roomname = this.roomname;
+    console.log('handleSubmit called', msg);
     this.send(msg);
     $('#send').find('.textfield').val('');
     this.fetch();
